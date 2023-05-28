@@ -10,10 +10,13 @@ NUM_OF_PUBLICATIONS = 5
 def index(request):
     template = 'blog/index.html'
     post_list = Post.objects.select_related(
-                'category', 'location', 'author').filter(
-                pub_date__lte=timezone.now(),
-                is_published=True,
-                category__is_published=True
+        'category',
+        'location',
+        'author'
+    ).filter(
+        pub_date__lte=timezone.now(),
+        is_published=True,
+        category__is_published=True
     )[:NUM_OF_PUBLICATIONS]
     context = {'post_list': post_list}
     return render(request, template, context)
@@ -23,9 +26,9 @@ def post_detail(request, id):
     template = 'blog/detail.html'
     post_list = get_object_or_404(Post.objects.select_related(
                 'location', 'author', 'category').filter(
-                pub_date__lte=timezone.now(),
-                is_published=True,
-                category__is_published=True
+                    pub_date__lte=timezone.now(),
+                    is_published=True,
+                    category__is_published=True
     ),
         pk=id
     )
