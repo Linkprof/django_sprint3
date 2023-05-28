@@ -70,4 +70,4 @@ class Post(BaseModel):
         verbose_name_plural = 'Публикации'
 
     def __str__(self):
-        return self.title 
+        return self.title
