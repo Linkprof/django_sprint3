@@ -25,10 +25,13 @@ def index(request):
 def post_detail(request, id):
     template = 'blog/detail.html'
     post_list = get_object_or_404(Post.objects.select_related(
-                'location', 'author', 'category').filter(
-                    pub_date__lte=timezone.now(),
-                    is_published=True,
-                    category__is_published=True
+        'location',
+        'author',
+        'category'
+    ).filter(
+        pub_date__lte=timezone.now(),
+        is_published=True,
+        category__is_published=True
     ),
         pk=id
     )
